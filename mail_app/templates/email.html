@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <meta charset="UTF-8">
+  <title>Пример отправки сообщений</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+  <h1 class="text-center">Оставьте заявку</h1>
+  <div class="container text-center">
+    <div id="form_container">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions form-group ">
+          <button type="submit" class="form-control btn btn-success">Отправить</button>
+        </div>
+      </form>
+    </div>
+  </div> <script defer="" src="https://pythonru.com/wp-content/cache/autoptimize/js/autoptimize_e892de75574e1559fe43cf5d49ab4835.js"></script>
+</code></pre>
+</body>
+</html>
+{#<pre class="wp-block-code"><code>#}
+

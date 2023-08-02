@@ -1,0 +1,39 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block context %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Dinnstore</h1>
+    <p class="lead">{{ title }} - это отличный интернет-магазин
+        </p>
+</div>
+    {% for object in object_list %}
+        <div class="col-3">
+
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <ul class="list-unstyled mt-2 mb-9 text-start m-1">
+
+                            {{ object }}
+
+                            <ul>
+                            <img class="card-img-top"
+                                src="{{ object.image|my_media }}"
+                                alt="Card image cap">
+                            </ul>
+                        </ul>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">₽ {{ object.price|title }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+
+                        {{ object.description|truncatechars:100 }}
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link href="{% static 'catalog/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    {# Меню #}
+    {% include 'catalog/includes/inc_home_menu.html' %}
+
+<div class="container">
+    <div class="row text-center">
+        {% block context %}
+        {% endblock %}
+    </div>
+
+        {# Футер #}
+        {% include 'catalog/includes/inc_futer.html' %}
+
+</div>
+
+<script src="{% static 'catalog/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
