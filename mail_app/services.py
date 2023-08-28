@@ -35,8 +35,7 @@ def send_mailing():
                     letter_body = mailing.mail.letter_body
                     print(3)
                     try:
-                        print(4)
-                        print(settings.EMAIL_HOST_USER, settings.EMAIL_USE_SSL)
+                        print(4, settings.EMAIL_HOST_USER)
                         send_mail(letter_subject, letter_body, settings.EMAIL_HOST_USER, [client.email])
                         # Создание лога рассылки при успехе
                         MailingLogs.objects.create(
