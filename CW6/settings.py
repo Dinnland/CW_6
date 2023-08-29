@@ -27,7 +27,9 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-#-^jnb$n&d3wb07@&@%d8g42ca-q+f#a6ji9^-58m$l4#7g80*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+# DEBUG = True
+DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -50,6 +52,8 @@ INSTALLED_APPS = [
 
     # My apps
     'mail_app',
+    'users',
+    'blog',
 ]
 
 SITE_ID = 1
@@ -150,6 +154,16 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+AUTH_USER_MODEL = 'users.User'
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -166,6 +180,7 @@ EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL') == 'True'
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+CASHE_ENABLED = os.getenv('CASHE_ENABLED') == 'True'
 
 # # чтобы почта выводилась в командной строке.
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

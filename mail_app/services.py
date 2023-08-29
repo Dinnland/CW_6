@@ -36,6 +36,7 @@ def send_mailing():
                     print(3)
                     try:
                         print(4, settings.EMAIL_HOST_USER)
+                        # print(letter_subject, letter_body, settings.EMAIL_HOST_USER)
                         send_mail(letter_subject, letter_body, settings.EMAIL_HOST_USER, [client.email])
                         # Создание лога рассылки при успехе
                         MailingLogs.objects.create(
@@ -44,8 +45,9 @@ def send_mailing():
                             attempt_status='successful',
                             server_response='Сообщение успешно отправлено',
                         )
+                        print(5, 'hui')
                         mailing.mailing_status = 'started'
-                        mailing.mailing_start_time += timedelta(days=frequency.get(mailing.mailing_period))
+                        # mailing.mailing_start_time += timedelta(days=frequency.get(mailing.mailing_period))
                         mailing.save()
 
                     except Exception as error:
@@ -58,7 +60,7 @@ def send_mailing():
                         )
             # Конец рассылки
             elif mailing.mailing_end_time <= current_time:
-                print(5)
+                print(6)
                 mailing.mailing_status = 'completed'
                 mailing.save()
             else:

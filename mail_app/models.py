@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 # Create your models here.
 NULLABLE = {'null': True, 'blank': True}
 
@@ -11,7 +13,7 @@ class Client(models.Model):
     surname = models.CharField(max_length=100, verbose_name='Фамилия')
     patronymic = models.CharField(max_length=100, verbose_name='Отчество', **NULLABLE)
     comment = models.CharField(max_length=300, verbose_name='Комментарий', **NULLABLE)
-
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, **NULLABLE)
     def __int__(self):
         return f'{self.email} {self.name} {self.surname}'
 
@@ -45,7 +47,7 @@ class MailingSettings(models.Model):
     mailing_status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='created', verbose_name='Статус рассылки')
     mail = models.ForeignKey('MessageToMailing', on_delete=models.CASCADE, verbose_name='Сообщение рассылки')
     clients = models.ManyToManyField('Client', verbose_name='Клиенты')
-
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, **NULLABLE)
     def __str__(self):
         return f"{self.get_mailing_period_display()} рассылка в {self.mailing_start_time}"
 
@@ -58,7 +60,7 @@ class MessageToMailing(models.Model):
     """Сообщение для рассылки"""
     letter_subject = models.CharField(max_length=500, verbose_name='тема письма')
     letter_body = models.TextField(verbose_name='тело письма')
-
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, **NULLABLE)
     def __int__(self):
         return f'{self.letter_subject} {self.letter_body} '
 
@@ -80,8 +82,8 @@ class MailingLogs(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время последней попытки')
     attempt_status = models.CharField(max_length=50, choices=MAILING_STATUS, verbose_name='Статус попытки')
     server_response = models.TextField(blank=True, null=True, verbose_name='Ответ сервера')
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, verbose_name='Клиент', **NULLABLE)
-    mailing = models.ForeignKey(MailingSettings, on_delete=models.SET_NULL, verbose_name='mailing', **NULLABLE)
+    client = models.ForeignKey('Client', on_delete=models.SET_NULL, verbose_name='Клиент', **NULLABLE)
+    mailing = models.ForeignKey('MailingSettings', on_delete=models.SET_NULL, verbose_name='mailing', **NULLABLE)
 
 
     def __int__(self):
