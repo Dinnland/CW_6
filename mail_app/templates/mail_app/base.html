@@ -5,23 +5,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
-    <link href="{% static 'catalog/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'mail_app/css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
     {# Меню #}
-    {% include 'catalog/includes/inc_home_menu.html' %}
+    {% include 'mail_app/includes/inc_home_menu.html' %}
 
 <div class="container">
+<div class="top-cover center-block text-center">
     <div class="row text-center">
-        {% block context %}
+
+        {% block content %}
         {% endblock %}
     </div>
-
+</div>
         {# Футер #}
-        {% include 'catalog/includes/inc_futer.html' %}
+        {% include 'mail_app/includes/inc_futer.html' %}
 
 </div>
 
-<script src="{% static 'catalog/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'mail_app/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
