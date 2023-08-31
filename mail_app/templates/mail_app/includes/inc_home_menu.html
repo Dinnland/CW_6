@@ -1,4 +1,4 @@
-{#{% load mailing_tag %}#}
+{% load mailing_tag %}
 {% block content %}
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">Dinnstore&nbsp</h5>
@@ -8,41 +8,38 @@
             <a class="p-2 btn btn-outline-primary  btn-sm" href="/">Главная</a>
             <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:contacts' %}>Контакты</a>
             {#        блог#}
-            <a class="p-2 btn btn-outline-dark btn-sm" href={% url 'mail_app:contacts' %}>БЛОГ</a>
-            {% if user.is_authenticated %}
-                {#            <div class="dropdown">#}
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    Рассылки
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href={% url 'mail_app:mailinglist' %}>Список рассылок</a></li>
-                    {#                    <li><a class="dropdown-item" href={% url 'mail_app:all_mailing_log' %}>Отчет по рассылкам</a></li>#}
-                    {#                    <li><a class="dropdown-item" href={% url 'mail_app:mailing_create' %}>Создать рассылку</a></li>#}
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <a class="dropdown-item" href="{% url "mail_app:mailing_create" %}">Добавить рассылку</a>
-                    <a class="dropdown-item" href="{% url "mail_app:mail_create" %}">Добавить сообщение</a>
-                    <a class="dropdown-item" href="{% url "mail_app:client_create" %}">Добавить клиента</a>
-                    {#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:mailinglist' %}>Список#}
-                    {#                        рассылок</a>#}
-                    {#                    отчет проведенных рассылок отдельно#}
-                    {#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:mailinglist' %}>Отчет по#}
-                    {#                        рассылкам</a>#}
-                    {#                    создание рассылки#}
-                    {#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:mailinglist' %}>Создать#}
-                    {#                        рассылку</a>#}
-                </ul>
-                {#            </div>#}
+            <a class="p-2 btn btn-outline-dark btn-sm" href={% url 'blog:blog_list' %}>БЛОГ</a>
 
-                {#        редактирование пользователя#}
-                {#            <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:mailinglist' %}>Список рассылок</a>#}
-                {#user#}
-                <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:cabinet' %}>Личный кабинет</a>
+            {% if user.is_authenticated %}
+                {#                {% if user.groups.all.first == 'moderator' %}#}
+                {% if request.user.groups.is_moderator %}
+                    moder
+
+                    {#                    {{ user.groups.all.first }}#}
+                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:moderator' %}>moderator
+                        кабинет</a>
+                {% else %}
+                    {#                    else#}
+                    {#            <div class="dropdown">#}
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Рассылки
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href={% url 'mail_app:mailinglist' %}>Список рассылок</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <a class="dropdown-item" href="{% url "mail_app:mailing_create" %}">Добавить рассылку</a>
+                        <a class="dropdown-item" href="{% url "mail_app:mail_create" %}">Добавить сообщение</a>
+                        <a class="dropdown-item" href="{% url "mail_app:client_create" %}">Добавить клиента</a>
+                    </ul>
+                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'mail_app:cabinet' %}>Личный кабинет</a>
+                {% endif %}
+
                 <a class="p-2 btn btn-outline-info btn-sm" href={% url 'users:profile' %}>Профиль</a>
                 <a class="p-2 btn btn-danger btn-sm" href={% url 'users:logout' %}>Выйти</a>
-                {#            users/profile/#}
             {% else %}
                 <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'users:login' %}>Войти</a>
                 <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'users:register' %}>Регистрация</a>

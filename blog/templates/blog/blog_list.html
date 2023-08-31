@@ -1,39 +1,25 @@
 {% extends 'mail_app/base.html' %}
-{% load mailing_tag %}
-{% load static %}
 {% block content %}
+{% load mailing_tag %}
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">DinnMail</h1>
-        <p class="lead">{{ title }} сервис рассылок
-        </p>
-    </div>
-
-
-
-
-
-    <div class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <p>Количество всех рассылок: {{ count_mail_all }}</p>
-                            <p>Количество активных рассылок: {{ count_mail_active }}</p>
-                            <p>Количество клиентов: {{ count_clients }}</p>
-                            <div class="col-md-4"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="py-5">
-            <div class="container">
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="row">
-                    <p>Блог:</p>
+                    {% if user.is_authenticated %}
+                        <div class="d-flex justify-content-center">
+                            {#    <a class="btn btn-primary" href="{% url '#' %}">Добавить</a>#}
+                            <a class="text-muted" href="#">Добавить</a>
+                        </div>
+                    {% endif %}
                     <div class="row">
+
+{#                        {% for post in post_list %}#}
                         {% for blog in blog_last_3_date %}
+
+
+
                             <div class="col-4 mt-4">
                                 {#    <a href="{% url "blog:blog_detail" el.pk %}" style="text-decoration: none; color: black">#}
                                 <div class="card mb-4 box-shadow">
@@ -67,10 +53,6 @@
             </div>
         </div>
     </div>
-    {#    <div class="card-header d-flex align-items-center justify-content-center" style="height: 100px">#}
-    {#        <h4 class="my-0 font-weight-normal">{{ blog.header }}</h4>#}
-    {#    </div>#}
-
-
+</div>
 
 {% endblock %}

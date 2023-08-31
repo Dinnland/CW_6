@@ -25,7 +25,7 @@ class Client(models.Model):
         verbose_name_plural = 'Clients'
         ordering = ('email',)
 
-#
+
 class MailingSettings(models.Model):
     """Рассылка (настройки)"""
     FREQUENCY_CHOICES = (
@@ -43,17 +43,25 @@ class MailingSettings(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название')
     mailing_start_time = models.DateTimeField(**NULLABLE, verbose_name='Время начала рассылки')
     mailing_end_time = models.DateTimeField(**NULLABLE, verbose_name='Время конца рассылки')
-    mailing_period = models.CharField(max_length=10, choices=FREQUENCY_CHOICES, verbose_name='Периодичность рассылки')
-    mailing_status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='created', verbose_name='Статус рассылки')
-    mail = models.ForeignKey('MessageToMailing', on_delete=models.CASCADE, verbose_name='Сообщение рассылки')
+    mailing_period = models.CharField(max_length=50, choices=FREQUENCY_CHOICES, verbose_name='Периодичность рассылки')
+    mailing_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='created', verbose_name='Статус рассылки')
+    mail = models.ForeignKey('MessageToMailing', on_delete=models.CASCADE, verbose_name='Сообщение рассылки',
+                             related_name='log_of_message')
     clients = models.ManyToManyField('Client', verbose_name='Клиенты')
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, **NULLABLE)
+
     def __str__(self):
-        return f"{self.get_mailing_period_display()} рассылка в {self.mailing_start_time}"
+        return (f"Название: '{self.title}' {self.get_mailing_period_display()} рассылка в {self.mailing_start_time}"
+                f"{self.mail }/{self.clients} /{self.owner}")
 
     class Meta:
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
+
+    def get_clients(self):
+        verbose_name = 'Клиенты'
+        """Для админки, чтоб выводить в админку, иначе error:'must not be a ManyToManyField.'"""
+        return ",".join([str(p) for p in self.clients.all()])
 
 
 class MessageToMailing(models.Model):

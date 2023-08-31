@@ -4,43 +4,52 @@ from django.urls import path
 from django.conf import settings
 from django.views.decorators.cache import cache_page
 
+from users.apps import UsersConfig
 from .views import *
-
+# app_name = UsersConfig.name
+app_name = 'mail_app'
 
 urlpatterns = [
-    # 3
+    # mail_app
     path('base/', base),
-    path('', HomeListView.as_view(extra_context={'title': 'DinnMail'}), name='home'),
+    path('', cache_page(5)(HomeListView.as_view(extra_context={'title': 'DinnMail'})), name='home'),
     path('contacts/', index_contacts, name='contacts'),
-
+    path('not_authenticated/', NotAuthenticated.as_view(extra_context={'title': 'Dinnstore'}), name='not_authenticated'),
     path('cabinet/', CabinetView.as_view(), name="cabinet"),
+
+    # mailing_settings
+    path('create-mailing/', MailingSettingsCreateView.as_view(), name='mailing_create'),
+    path('mailing-settings-list/', MailingSettings1ListView.as_view(extra_context={'title': 'DinnMail'}), name="mailinglist"),
+    path('mailing-settings/<int:pk>/update/', MailingSettingsUpdateView.as_view(), name='mailing_upd'),
+    path('mailing-settings/<int:pk>/delete/', MailingSettingsDeleteView.as_view(), name='mailing_del'),
+    # path('mailinglist/', MailingSettings1ListView.as_view(extra_context={'title': 'DinnMail'}), name="mailinglist"),
+
     # path('profile/', ProfileDataView.as_view(), name="profile"),
 
-    path('create-mailing/', MailingCreateView.as_view(), name='mailing_create'),
+
+    # client
     path('create-client/', ClientCreateView.as_view(), name='client_create'),
-    path('create-mail/', MessageToMailingCreate.as_view(), name='mail_create'),
-    #
-    # 1
-    path('mailinglist/', Mailing1ListView.as_view(extra_context={'title': 'DinnMail'}), name="mailinglist"),
-    path('mailing/<int:pk>/update/', MailingUpdateView.as_view(), name='mailing_upd'),
-
     path('client/<int:pk>/update/', ClientUpdateView.as_view(), name='client_upd'),
-    path('mail/<int:pk>/update/', MessageToMailingUpdateView.as_view(), name='client_upd'),
-
-    # 1
-    path('mailinglist/', Mailing1ListView.as_view(extra_context={'title': 'DinnMail'}), name="mailinglist"),
-
     path('client-list/', ClientListView.as_view(), name='client_list'),
-    path('mail-list/', MailMessageListView.as_view(), name='mail_list'),
-    path('mailing-log/<int:pk>', MailingLogsListView.as_view(), name='mailing_log'),
-    path('all-mailing-log/<int:pk>', MailingLogsListView.as_view(), name='all_mailing_log'),
-
-    path('mailing/<int:pk>/delete/', MailingDeleteView.as_view(), name='mailing_del'),
     path('client/<int:pk>/delete/', ClientDeleteView.as_view(), name='client_del'),
-    path('mail/<int:pk>/delete/', MessageToMailingDeleteView.as_view(), name='mail_del'),
+
+
+    # MessageToMailing
+    path('create-message-to-mail/', MessageToMailingCreate.as_view(), name='mail_create'),
+    path('message-to-mail/<int:pk>/update/', MessageToMailingUpdateView.as_view(), name='message_upd'),
+    path('message-to-mail/<int:pk>/delete/', MessageToMailingDeleteView.as_view(), name='mail_del'),
+    # path('mail/<int:pk>/update/', MessageToMailingUpdateView.as_view(), name='Message_upd'),
+    path('message-to-mail-list/', MessageToMailingListView.as_view(), name='mail_list'),
+
+
+
+    # Logs
+    path('mailing-logs/<int:pk>', MailingLogsListView.as_view(), name='mailing_log'),
+    # path('all-mailing-logs/<int:pk>', MailingLogsListView.as_view(), name='all_mailing_log'),
+
+
     path('update_status/<int:pk>/', MailingStatusUpdateView.as_view(), name='update_status'),
 
-    path('not_authenticated/', NotAuthenticated.as_view(extra_context={'title': 'Dinnstore'}), name='not_authenticated'),
 
     path('moderka/', ModeratorViews.as_view(), name="moderators"),
 

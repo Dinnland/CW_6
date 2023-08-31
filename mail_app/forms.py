@@ -48,6 +48,22 @@ class MailingSettingsForm(forms.ModelForm):
         exclude = ('mailing_status', 'owner',)
 
 
+class MailingSettingsFormNotUser(forms.ModelForm):
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['mailing_start_time'].widget = DateInput(attrs={'type': 'datetime-local'})
+        self.fields['mailing_end_time'].widget = DateInput(attrs={'type': 'datetime-local'})
+        self.user = user
+        self.fields['clients'].queryset = Client.objects.filter(owner=self.user)
+        self.fields['mail'].queryset = MessageToMailing.objects.filter(owner=self.user)
+
+    class Meta:
+        model = MailingSettings
+        fields = '__all__'
+        # exclude = ('mailing_status', 'owner',)
+
+
 class ClientForm(FormMixin, forms.ModelForm):
     class Meta:
         model = Client
@@ -61,3 +77,11 @@ class MailingFilterForm(forms.Form):
     status = forms.ChoiceField(choices=[('', 'Все')] + list(status_choices),
                                required=False,
                                widget=forms.Select(attrs={'id': 'status'}))
+
+
+class MailingSettingsUpdateFormModerator(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = MailingSettings
+        # fields = '__all__'
+        fields = ('title', 'mailing_start_time',)
+

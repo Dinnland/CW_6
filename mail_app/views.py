@@ -5,9 +5,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import View, ListView, DetailView, UpdateView, CreateView, TemplateView, DeleteView
+
+from blog.models import Blog
 # from apps.blog.models import Blog
 from mail_app.models import *
 from mail_app.forms import *
+from mail_app.services import get_filter_user_group
 
 
 # Create your views here.
@@ -16,6 +19,10 @@ from mail_app.forms import *
 #     """перенаправляет урл сразу на /home/"""
 #     response = redirect('/home/')
 #     return response
+# class BlogListView(ListView):
+#     model = Blog
+#     context_object_name = 'post_list'
+
 
 def base(request):
     """ Базовый шаблон с меню, футером и тд """
@@ -32,18 +39,14 @@ class HomeListView(LoginRequiredMixin,  ListView):
     template_name = 'mail_app/home.html'
     login_url = 'mail_app:not_authenticated'
 
-    # PermissionRequiredMixin,
-    # permission_required = 'catalog.'
-
-    # def get_queryset(self):
-    #     """показывает продукты, которые созданы владельцем-юзером"""
-    #     return super().get_queryset().filter(owner=self.request.user)
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['count_mail_all'] = MailingSettings.objects.all().count()
         context_data['count_mail_active'] = MailingSettings.objects.filter(mailing_status__in=['started']).count()
         context_data['count_clients'] = Client.objects.distinct().count()
-        # context_data['blog'] = Blog.objects.filter(is_published=True).order_by('?')[:3]
+
+        context_data['bloga3'] = Blog.objects.all()[:3]
+        context_data['blog_last_3_date'] = Blog.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
         context_data['user'] = self.request.user
         return context_data
 
@@ -57,7 +60,7 @@ def index_contacts(request):
 # create ----------------------------------------------------------------
 
 
-class MailingCreateView(CreateView):
+class MailingSettingsCreateView(CreateView):
     model = MailingSettings
     form_class = MailingSettingsForm
     template_name = 'mail_app/mailing_form.html'
@@ -96,44 +99,32 @@ class MessageToMailingCreate(CreateView):
 
 
 # list ----------------------------------------------------------------
-class Mailing1ListView(LoginRequiredMixin,  ListView):
+class MailingSettings1ListView(LoginRequiredMixin, ListView):
     """Главная стр с продуктами"""
     model = MailingSettings
     template_name = 'mail_app/mailingsettings_list.html'
     context_object_name = 'mailing_list'
 
-    # ограничение доступа анонимных пользователей
-    # 19 Уведомление для неавторизованных пользователей
-    # login_url = 'catalog:not_authenticated'
+    # Ограничение доступа анонимных пользователей
+    login_url = 'catalog:not_authenticated'
+    def get_queryset(self):
+        """Ограничение:модератор видит все рассылки, юзер только свои"""
+        if self.request.user.groups.filter(name='moderator'):
+            queryset = MailingSettings.objects.all()
+        else:
+            queryset = MailingSettings.objects.filter(owner_id=self.request.user.pk)
 
-
-    # PermissionRequiredMixin,
-    # permission_required = 'catalog.'
-    # def get_queryset(self):
-    #     """показывает продукты, которые созданы владельцем-юзером"""
-    #     return super().get_queryset().filter(owner=self.request.user)
-
-# class MailingListView(LoginRequiredMixin, ListView):
-#     model = MailingSettings
-#     template_name = 'mail_app/mailingsettings_list.html'
-#     context_object_name = 'mailing_list'
-#
-#     def get_queryset(self):
-#         if self.request.user.groups.filter(name='moderators'):
-#             queryset = MailingSettings.objects.all()
-#         else:
-#             queryset = MailingSettings.objects.filter(owner_id=self.request.user.pk)
-#
-#         owner_id = self.request.user.pk
-#         state = self.request.GET.get('status')
-#         if self.request.GET.get('status'):
-#             queryset = MailingSettings.objects.filter(owner_id=owner_id)
-#         return queryset
+        # owner_id = self.request.user.pk
+        # # state = self.request.GET.get('status')
+        # if self.request.GET.get('status'):
+        #     queryset = MailingSettings.objects.filter(owner_id=owner_id)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter_form'] = MailingFilterForm(self.request.GET)
         return context
+
 
 
 class ClientListView(LoginRequiredMixin, ListView):
@@ -142,6 +133,7 @@ class ClientListView(LoginRequiredMixin, ListView):
     context_object_name = 'client_list'
 
     def get_queryset(self):
+        """Ограничение:модератор видит всех клиентов , юзер только своих"""
         if self.request.user.groups.filter(name='moderators'):
             queryset = Client.objects.all()
         else:
@@ -149,12 +141,13 @@ class ClientListView(LoginRequiredMixin, ListView):
         return queryset
 
 
-class MailMessageListView(LoginRequiredMixin, ListView):
+class MessageToMailingListView(LoginRequiredMixin, ListView):
     model = MessageToMailing
-    template_name = 'mail_app/mail_list.html'
+    template_name = 'mail_app/message_to_mailing_list.html'
     context_object_name = 'mail_list'
 
     def get_queryset(self):
+        """Ограничение:модератор видит все сообщения, юзер только свои"""
         if self.request.user.groups.filter(name='moderators'):
             queryset = MessageToMailing.objects.all()
         else:
@@ -167,25 +160,53 @@ class MailingLogsListView(LoginRequiredMixin, ListView):
     template_name = 'mail_app/mailinglog_list.html'
     context_object_name = 'mailing_log_list'
 
-    def get_queryset(self, *args, **kwargs):
+    # def get_queryset(self, *args, **kwargs):
+    #     mailing_pk = self.kwargs.get('id')
+    #     # mailing_pk = MailingSettings.objects.get(id)
+    #     # g = MailingSettings.
+    #     g = MailingSettings.objects.in_bulk()
+    #     # for id in g:
+    #     #     # print(g[id].pk)
+    #     #     print(id)
+    #     #     # print(g[id].age)
+    #     # print(g[id])
+    #     mailing_settings = get_object_or_404(MailingSettings, pk=mailing_pk)
+    #     queryset = MailingLogs.objects.filter(mailing=mailing_settings)
+    #
+    #     return queryset
 
-        # mailing_pk = self.kwargs.get('mailing_pk')
-        queryset = super().get_queryset(*args, **kwargs)
-        # owner =
-        # queryset = super().get_queryset().filter(mailing=self.request.user)
-        # owner = mailing
 
-        # Выводит логи толко по текущему юзеру
-        # queryset = super().get_queryset().filter(mailing=self.request.user.pk)
+    #     if self.request.user.groups.filter(name='moderators'):
+    #         queryset = MailingLogs.objects.all()
+    #         # g = MailingSettings.objects.get(id)
+    #     else:
+    #         # obj = MailingSettings.get_by_pk(object_id)
+    #         # if MailingSettings.objects.filter(owner_id=self.request.user.pk):
+    #             # if MailingLogs.objects.filter(mailing_id=g):
+    #          queryset = MailingLogs.objects.filter(mailing_id=2)
+    #     return queryset
 
-        # mailing_pk = self.kwargs.get('mailing_log')
-        #
-        #     # print('mailing_pk - ошибочка')
-        #     # queryset = 'mailing_pk - ошибочка'
-        #
-        # mailing_settings = get_object_or_404(MailingSettings, pk=mailing_pk)
-        # queryset = MailingLogs.objects.filter(mailing=mailing_settings)
+
+
+
+    def get_queryset(self):
+        """Ограничение:модератор видит все рассылки, юзер только свои"""
+        # f = self.request.user.pk
+        if self.request.user.groups.filter(name='moderator'):
+            queryset = MailingLogs.objects.all()
+
+        else:
+            print(55555)
+            queryset = MailingLogs.objects.filter(mailing__owner=self.request.user.pk)
         return queryset
+
+
+
+        # owner_id = self.request.user.pk
+        # # state = self.request.GET.get('status')
+        # if self.request.GET.get('status'):
+        #     queryset = MailingSettings.objects.filter(owner_id=owner_id)
+        # return queryset
 
 
 
@@ -193,19 +214,64 @@ class MailingLogsListView(LoginRequiredMixin, ListView):
 # update ----------------------------------------------------------------
 
 
-class MailingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class MailingSettingsUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = MailingSettings
-    form_class = MailingSettingsForm
+    # form_class = MailingSettingsForm
     template_name = 'mail_app/mailing_form.html'
-    # success_url = reverse_lazy('mail_app:cabinet')
-    success_url = reverse_lazy('mail_app:home')
+    success_url = reverse_lazy('mail_app:cabinet')
+    # success_url = reverse_lazy('mail_app:home')
+
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user
-        return super().form_valid(form)
+        if form.instance.owner == self.request.user:
+            form = super().form_valid(form)
+        else:
+            form = MailingSettingsFormNotUser
+            return form
+
+    # def get_form_class(self, queryset=None):
+    #     """Тут в зависимости от группы юзера выводятся разные формы продукта"""
+    #     self.object = super().get_object(queryset)
+    #     if self.request.user.groups.filter(name='moderator').exists():
+    #         form_class = ProductUpdateFormModerator
+    #         return form_class
+    #     else:
+    #         form_class = ProductUpdateForm
+    #         return form_class
+        # return form_class
+    def get_queryset(self):
+        """Ограничение:модератор видит все рассылки, юзер только свои"""
+        if self.request.user.groups.filter(name='moderators'):
+            queryset = MailingSettings.objects.all()
+        else:
+            queryset = MailingSettings.objects.filter(owner_id=self.request.user.pk)
+        # return queryset
+
+        owner_id = self.request.user.pk
+        # state = self.request.GET.get('status')
+        if self.request.GET.get('status'):
+            queryset = MailingSettings.objects.filter(owner_id=owner_id)
+        return queryset
+    def get_form_class(self, queryset=None):
+        """Тут в зависимости от группы юзера выводятся разные формы продукта"""
+        self.object = super().get_object(queryset)
+        form_class = get_filter_user_group(del_group='moderator', user=self.request.user)
+        return form_class
+
+
+    # def get_form_class(self, queryset=None):
+    #     """Тут в зависимости от группы юзера выводятся разные формы продукта"""
+    #     self.object = super().get_object(queryset)
+    #     # form_class = ProductUpdateFormModerator
+    #     if form_class.instance.owner == self.request.user:
+    #         form_class = super().form_valid(form)
+    #     else:
+    #         form_class = MailingSettingsFormNotUser
+    #     return form_class
+
 
     def test_func(self):
-        return self.request.user == self.get_object().owner
+            return self.request.user == self.get_object().owner
 
 
 class ClientUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -238,7 +304,7 @@ class MessageToMailingUpdateView(LoginRequiredMixin, UserPassesTestMixin, Update
 # delete ----------------------------------------------------------------
 
 
-class MailingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class MailingSettingsDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = MailingSettings
     template_name = 'mail_app/confirm_delete.html'
     success_url = reverse_lazy('mail_app:cabinet')
@@ -256,8 +322,9 @@ class ClientDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == self.get_object().owner
 
 
-class MessageToMailingDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = MailingSettings
+class MessageToMailingDeleteView(LoginRequiredMixin, DeleteView):
+    # UserPassesTestMixin,
+    model = MessageToMailing
     template_name = 'mail_app/confirm_delete.html'
     success_url = reverse_lazy('mail_app:mail_list')
 
@@ -305,7 +372,7 @@ class CabinetView(TemplateView):
         profile_context = profile_data_view.get_context_data(**kwargs)
 
         # mailing_list_view = MailingListView()
-        mailing_list_view = Mailing1ListView()
+        mailing_list_view = MailingSettings1ListView()
 
         mailing_list_view.request = request
         queryset = mailing_list_view.get_queryset()
@@ -325,7 +392,10 @@ class ModeratorViews(UserPassesTestMixin, TemplateView):
     template_name = 'mail_app/moderators.html'
 
     def test_func(self):
-        return self.request.user.groups.filter(name='moderators').exists()
+        f = self.request.user.groups.filter(name='moderator').exists()
+        print(f)
+        # return self.request.user.groups.filter(name='moderators').exists()
+        return f
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
