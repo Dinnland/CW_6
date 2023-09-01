@@ -114,10 +114,13 @@ class MailingSettings1ListView(LoginRequiredMixin, ListView):
         else:
             queryset = MailingSettings.objects.filter(owner_id=self.request.user.pk)
 
-        # owner_id = self.request.user.pk
-        # # state = self.request.GET.get('status')
-        # if self.request.GET.get('status'):
-        #     queryset = MailingSettings.objects.filter(owner_id=owner_id)
+
+        owner_id = self.request.user.pk
+        state = self.request.GET.get('status')
+        if self.request.GET.get('status'):
+            queryset = MailingSettings.objects.filter(owner_id=owner_id)
+
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -186,19 +189,27 @@ class MailingLogsListView(LoginRequiredMixin, ListView):
     #          queryset = MailingLogs.objects.filter(mailing_id=2)
     #     return queryset
 
-
-
-
     def get_queryset(self):
-        """Ограничение:модератор видит все рассылки, юзер только свои"""
-        # f = self.request.user.pk
-        if self.request.user.groups.filter(name='moderator'):
-            queryset = MailingLogs.objects.all()
+        mailing_pk = self.kwargs.get('pk')
+        # print(mailing_pk)
+        mailing_settings = get_object_or_404(MailingSettings, pk=mailing_pk)
+        # print(f'mailing_settings----{mailing_settings}')
 
-        else:
-            print(55555)
-            queryset = MailingLogs.objects.filter(mailing__owner=self.request.user.pk)
+        queryset = MailingLogs.objects.filter(mailing=mailing_pk)
+        # print(queryset)
         return queryset
+
+
+    # def get_queryset(self):
+    #     """Ограничение:модератор видит все рассылки, юзер только свои"""
+    #     # f = self.request.user.pk
+    #     if self.request.user.groups.filter(name='moderator'):
+    #         queryset = MailingLogs.objects.all()
+    #
+    #     else:
+    #         print(55555)
+    #         queryset = MailingLogs.objects.filter(mailing__owner=self.request.user.pk)
+    #     return queryset
 
 
 
@@ -393,8 +404,6 @@ class ModeratorViews(UserPassesTestMixin, TemplateView):
 
     def test_func(self):
         f = self.request.user.groups.filter(name='moderator').exists()
-        print(f)
-        # return self.request.user.groups.filter(name='moderators').exists()
         return f
 
     def get_context_data(self, **kwargs):

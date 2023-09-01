@@ -11,6 +11,10 @@ def mediapath(value):
     else:
         return '/media/mail_app/dinn_logo_white.png'
         # return '/media/catalog/dinn_logo_white.png'
-# @register.filter()
-# def is_moderator(user):
-#     return user.groups.filter(name='moderators').exists()
+
+@register.filter()
+def is_moderator(user):
+    return user.groups.filter(name='moderator').exists()
+
+# def is_superuser(user):
+#     return user.is_superuser

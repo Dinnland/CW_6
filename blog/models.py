@@ -10,7 +10,7 @@ class Blog(models.Model):
     Модель для блога
     """
     header = models.CharField(max_length=100, verbose_name='заголовок')
-    # slug = models.CharField(max_length=150, verbose_name=' человекопонятный URL', **NULLABLE)
+    slug = models.CharField(max_length=150, verbose_name=' человекопонятный URL', **NULLABLE)
     content = models.TextField(verbose_name='содержимое')
     image = models.ImageField(upload_to='blog/', verbose_name='превью (изображение)', **NULLABLE)
     date_of_create = models.DateTimeField(verbose_name='дата создания')

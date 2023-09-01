@@ -7,11 +7,11 @@ from users.models import User
 class UserAdmin(admin.ModelAdmin):
     """Клиенты"""
     # admin.site.register(User)
-    list_display = ('email', 'phone', 'avatar', 'country', 'email_verify')
+    list_display = ('email', 'phone', 'avatar', 'country', 'is_verified')
     search_fields = ('email',)
 
-    moderator_readonly_fields = ('first_name', 'last_name', 'email', 'phone', 'avatar', 'country', 'email_verify',)
-    # all_fields_my = ( 'phone', 'avatar', 'country', 'email_verify')
+    moderator_readonly_fields = ('first_name', 'last_name', 'email', 'phone', 'avatar', 'country', 'is_verified',)
+    # all_fields_my = ( 'phone', 'avatar', 'country', 'is_verified')
     # readonly_fields = all_fields_my
 
     f = ('is_staff', 'is_active', 'date_joined')

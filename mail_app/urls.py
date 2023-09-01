@@ -50,7 +50,7 @@ urlpatterns = [
 
     path('update_status/<int:pk>/', MailingStatusUpdateView.as_view(), name='update_status'),
 
-
-    path('moderka/', ModeratorViews.as_view(), name="moderators"),
+    # moderator_kabinet
+    path('moderator/', ModeratorViews.as_view(), name="moderator"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

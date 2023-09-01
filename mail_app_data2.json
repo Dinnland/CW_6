@@ -1,0 +1,733 @@
+[
+{
+  "model": "mail_app.client",
+  "pk": 1,
+  "fields": {
+    "email": "dinarek2013@gmail.com",
+    "name": "Динар",
+    "surname": "Мингазов",
+    "patronymic": null,
+    "comment": null,
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.client",
+  "pk": 3,
+  "fields": {
+    "email": "dinarek2013@gmail.com",
+    "name": "bom",
+    "surname": "m",
+    "patronymic": null,
+    "comment": null,
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.client",
+  "pk": 4,
+  "fields": {
+    "email": "mingazov.dinar@bk.ru",
+    "name": "Динар",
+    "surname": "Мингазов",
+    "patronymic": null,
+    "comment": null,
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.client",
+  "pk": 6,
+  "fields": {
+    "email": "dinarek2013@gmail.com",
+    "name": "dinarek2013@gmail.com",
+    "surname": "Мингазов",
+    "patronymic": null,
+    "comment": "cvv",
+    "owner": 7
+  }
+},
+{
+  "model": "mail_app.client",
+  "pk": 7,
+  "fields": {
+    "email": "dinarek2013@gmail.com",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "patronymic": "Отчество",
+    "comment": "fghfghfgh",
+    "owner": 6
+  }
+},
+{
+  "model": "mail_app.client",
+  "pk": 8,
+  "fields": {
+    "email": "dinarek2013@gmail.com",
+    "name": "Динар",
+    "surname": "Мингазов",
+    "patronymic": "енедитович",
+    "comment": "комментарий",
+    "owner": 7
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 1,
+  "fields": {
+    "title": "1",
+    "mailing_start_time": "2023-08-29T00:37:58Z",
+    "mailing_end_time": "2023-08-29T00:38:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 1,
+    "owner": null,
+    "clients": [
+      1
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 2,
+  "fields": {
+    "title": "2",
+    "mailing_start_time": "2023-08-30T01:20:25Z",
+    "mailing_end_time": "2023-08-29T01:30:26Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 1,
+    "owner": null,
+    "clients": [
+      1
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 3,
+  "fields": {
+    "title": "3",
+    "mailing_start_time": "2023-08-29T01:14:13Z",
+    "mailing_end_time": "2023-08-29T01:14:15Z",
+    "mailing_period": "monthly",
+    "mailing_status": "off",
+    "mail": 1,
+    "owner": null,
+    "clients": [
+      1
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 5,
+  "fields": {
+    "title": "6",
+    "mailing_start_time": "2023-08-30T13:45:00Z",
+    "mailing_end_time": "2023-08-29T13:55:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 5,
+    "owner": null,
+    "clients": [
+      3
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 6,
+  "fields": {
+    "title": "8",
+    "mailing_start_time": "2023-08-30T13:48:00Z",
+    "mailing_end_time": "2023-08-29T13:56:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 5,
+    "owner": null,
+    "clients": [
+      3
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 8,
+  "fields": {
+    "title": "пркр",
+    "mailing_start_time": "2023-08-29T13:57:00Z",
+    "mailing_end_time": "2023-08-29T13:57:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 2,
+    "owner": null,
+    "clients": [
+      1
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 9,
+  "fields": {
+    "title": "f",
+    "mailing_start_time": "2023-08-30T13:59:00Z",
+    "mailing_end_time": "2023-08-29T14:05:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 5,
+    "owner": null,
+    "clients": [
+      3
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 10,
+  "fields": {
+    "title": "1",
+    "mailing_start_time": "2023-08-29T17:39:00Z",
+    "mailing_end_time": "2023-08-29T17:39:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 4,
+    "owner": null,
+    "clients": [
+      3
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 11,
+  "fields": {
+    "title": "etetet",
+    "mailing_start_time": "2023-08-29T19:31:00Z",
+    "mailing_end_time": "2023-08-29T19:31:00Z",
+    "mailing_period": "weekly",
+    "mailing_status": "completed",
+    "mail": 4,
+    "owner": null,
+    "clients": [
+      3
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 12,
+  "fields": {
+    "title": "ghfgh",
+    "mailing_start_time": "2023-08-30T02:15:00Z",
+    "mailing_end_time": "2023-08-30T02:25:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 11,
+    "owner": 6,
+    "clients": [
+      7
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 13,
+  "fields": {
+    "title": "qqqqqqqqqqq",
+    "mailing_start_time": "2023-08-30T02:23:00Z",
+    "mailing_end_time": "2023-08-30T02:30:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 12,
+    "owner": 6,
+    "clients": [
+      7
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 14,
+  "fields": {
+    "title": "wwwwwwwwwbv",
+    "mailing_start_time": "2023-08-30T02:26:00Z",
+    "mailing_end_time": "2023-08-30T02:30:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 12,
+    "owner": 6,
+    "clients": [
+      7
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 15,
+  "fields": {
+    "title": "5ter",
+    "mailing_start_time": "2023-08-30T02:32:00Z",
+    "mailing_end_time": "2023-08-30T02:35:00Z",
+    "mailing_period": "weekly",
+    "mailing_status": "completed",
+    "mail": 11,
+    "owner": 6,
+    "clients": [
+      7
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 16,
+  "fields": {
+    "title": "fgg",
+    "mailing_start_time": "2023-08-30T02:38:00Z",
+    "mailing_end_time": "2023-08-30T02:39:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed status",
+    "mail": 11,
+    "owner": 6,
+    "clients": [
+      3
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 17,
+  "fields": {
+    "title": "dinn",
+    "mailing_start_time": "2023-08-30T21:42:00Z",
+    "mailing_end_time": "2023-08-30T21:50:00Z",
+    "mailing_period": "weekly",
+    "mailing_status": "completed status",
+    "mail": 2,
+    "owner": 7,
+    "clients": [
+      1
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 18,
+  "fields": {
+    "title": "l,,l,l,",
+    "mailing_start_time": "2023-08-30T21:46:00Z",
+    "mailing_end_time": "2023-08-30T21:50:00Z",
+    "mailing_period": "monthly",
+    "mailing_status": "completed",
+    "mail": 9,
+    "owner": 7,
+    "clients": [
+      6
+    ]
+  }
+},
+{
+  "model": "mail_app.mailingsettings",
+  "pk": 19,
+  "fields": {
+    "title": "рассылка новая",
+    "mailing_start_time": "2023-09-01T03:17:00Z",
+    "mailing_end_time": "2023-09-01T03:21:00Z",
+    "mailing_period": "daily",
+    "mailing_status": "completed",
+    "mail": 13,
+    "owner": 7,
+    "clients": [
+      8
+    ]
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 1,
+  "fields": {
+    "letter_subject": "1",
+    "letter_body": "1",
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 2,
+  "fields": {
+    "letter_subject": "2",
+    "letter_body": "2",
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 4,
+  "fields": {
+    "letter_subject": "2test",
+    "letter_body": "4",
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 5,
+  "fields": {
+    "letter_subject": "привет",
+    "letter_body": "Аида",
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 6,
+  "fields": {
+    "letter_subject": "1",
+    "letter_body": "1",
+    "owner": null
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 9,
+  "fields": {
+    "letter_subject": "4",
+    "letter_body": "44",
+    "owner": 7
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 10,
+  "fields": {
+    "letter_subject": "4r34",
+    "letter_body": "34r34",
+    "owner": 7
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 11,
+  "fields": {
+    "letter_subject": "ghfghfgh",
+    "letter_body": "fghfghfh",
+    "owner": 6
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 12,
+  "fields": {
+    "letter_subject": "qqqqqqqqqqqqqqqqизмена",
+    "letter_body": "qqqqqqqqqqqqq\r\nизменил",
+    "owner": 6
+  }
+},
+{
+  "model": "mail_app.messagetomailing",
+  "pk": 13,
+  "fields": {
+    "letter_subject": "это тест кокретный",
+    "letter_body": "Bootstrap не имеет компонента, который позволяет фильтровать. Тем не менее, мы можем использовать jQuery для фильтрации/поиска элементов. Фильтровать таблицы.",
+    "owner": 7
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 1,
+  "fields": {
+    "timestamp": "2023-08-29T01:24:31.787Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 1,
+    "mailing": 2
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 2,
+  "fields": {
+    "timestamp": "2023-08-29T13:46:21.291Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 3,
+    "mailing": 5
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 3,
+  "fields": {
+    "timestamp": "2023-08-29T13:48:42.559Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 3,
+    "mailing": 6
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 4,
+  "fields": {
+    "timestamp": "2023-08-29T13:50:29.077Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 3,
+    "mailing": null
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 5,
+  "fields": {
+    "timestamp": "2023-08-29T13:52:10.377Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 3,
+    "mailing": 8
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 6,
+  "fields": {
+    "timestamp": "2023-08-29T13:55:17.081Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 1,
+    "mailing": 8
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 7,
+  "fields": {
+    "timestamp": "2023-08-29T13:56:43.519Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 1,
+    "mailing": 8
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 8,
+  "fields": {
+    "timestamp": "2023-08-29T13:59:34.849Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 3,
+    "mailing": 9
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 9,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:17.112Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 10,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:23.154Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 11,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:29.088Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 12,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:35.121Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 13,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:41.123Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 14,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:47.149Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 15,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:53.271Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 16,
+  "fields": {
+    "timestamp": "2023-08-30T02:16:59.434Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 17,
+  "fields": {
+    "timestamp": "2023-08-30T02:17:05.476Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 18,
+  "fields": {
+    "timestamp": "2023-08-30T02:17:11.841Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 19,
+  "fields": {
+    "timestamp": "2023-08-30T02:17:17.828Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 20,
+  "fields": {
+    "timestamp": "2023-08-30T02:17:23.965Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 21,
+  "fields": {
+    "timestamp": "2023-08-30T02:17:29.921Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 12
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 22,
+  "fields": {
+    "timestamp": "2023-08-30T02:23:28.527Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 13
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 23,
+  "fields": {
+    "timestamp": "2023-08-30T02:26:04.924Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 14
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 24,
+  "fields": {
+    "timestamp": "2023-08-30T02:32:03.221Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 15
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 25,
+  "fields": {
+    "timestamp": "2023-08-30T02:38:05.591Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 7,
+    "mailing": 16
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 26,
+  "fields": {
+    "timestamp": "2023-08-30T21:46:45.179Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 6,
+    "mailing": 18
+  }
+},
+{
+  "model": "mail_app.mailinglogs",
+  "pk": 27,
+  "fields": {
+    "timestamp": "2023-09-01T03:17:54.102Z",
+    "attempt_status": "successful",
+    "server_response": "Сообщение успешно отправлено",
+    "client": 8,
+    "mailing": 19
+  }
+}
+]

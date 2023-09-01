@@ -1,0 +1,93 @@
+[
+{
+  "model": "blog.blog",
+  "pk": 1,
+  "fields": {
+    "header": "1first",
+    "slug": null,
+    "content": "2",
+    "image": "",
+    "date_of_create": "2023-08-29T20:44:38Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 2,
+  "fields": {
+    "header": "30 20:03:43",
+    "slug": null,
+    "content": "dfsdd",
+    "image": "",
+    "date_of_create": "2023-08-30T17:03:43Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 3,
+  "fields": {
+    "header": "30 23:11:43",
+    "slug": null,
+    "content": "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    "image": "",
+    "date_of_create": "2023-08-30T20:11:43Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 4,
+  "fields": {
+    "header": "30 23:12:01",
+    "slug": null,
+    "content": "fgdfgdfgdfgdfgdfgdfgdfgdfg",
+    "image": "",
+    "date_of_create": "2023-08-30T20:12:01Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 5,
+  "fields": {
+    "header": "blog5",
+    "slug": null,
+    "content": "cxnjpoxvnjdvnjdvbijodvbijoj",
+    "image": "blog/photo_2023-07-11_16-02-24.jpg",
+    "date_of_create": "2023-08-30T21:50:15Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 6,
+  "fields": {
+    "header": "blog",
+    "slug": "blog",
+    "content": "sdadasd",
+    "image": "",
+    "date_of_create": "2023-09-01T04:20:00Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 7,
+  "fields": {
+    "header": "blog",
+    "slug": "blog",
+    "content": "sdadasd",
+    "image": "",
+    "date_of_create": "2023-09-01T04:20:00Z",
+    "sign_of_publication": true,
+    "quantity_of_views": 0
+  }
+}
+]
