@@ -8,6 +8,7 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class User(AbstractUser):
+    """Пользователь сервиса"""
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')
 
@@ -15,7 +16,7 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='users/', verbose_name='аватар', **NULLABLE)
     country = models.CharField(max_length=100, verbose_name='страна',  **NULLABLE)
 
-    email_verify = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

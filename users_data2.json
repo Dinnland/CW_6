@@ -1,0 +1,90 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$nTWENX4AEHzy79o3baMW2R$I8ntijNbkVQ1kyl5Ck18NV/hLRD2eFGR3L4/rEnAxYA=",
+    "last_login": "2023-09-01T01:30:03.096Z",
+    "is_superuser": true,
+    "first_name": "Admin",
+    "last_name": "Dinn",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-08-28T23:46:25Z",
+    "email": "dinn.land@mail.ru",
+    "phone": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AoSAb3XAyISdInIzpTMvyY$j86F3DRDysSzQR0+2TH57TkrRfOHehYe6iYk5vkitxg=",
+    "last_login": "2023-09-01T03:24:37.651Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-08-29T22:08:02Z",
+    "email": "mingazov.dinar@bk.ru",
+    "phone": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$EATJLlvLiu0IF4SC2Iya8Q$9E7/ul931jAChKeWA3jygxHNjqS7JIxcfmoSbskUgXI=",
+    "last_login": "2023-09-01T03:42:54.710Z",
+    "is_superuser": false,
+    "first_name": "Динарff",
+    "last_name": "Мингазов",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-08-29T23:07:41Z",
+    "email": "dinarek2013@gmail.com",
+    "phone": null,
+    "avatar": "",
+    "country": "Россия",
+    "is_verified": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$vxCdqLG99iAuhaJBPvJj4o$O0POHuT7R3oTUDj48nUGAb/DIxvU5kyTiy51xWwejYs=",
+    "last_login": "2023-09-01T01:29:41.798Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-09-01T01:14:40.206Z",
+    "email": "d.mingazow2013@yandex.ru",
+    "phone": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
